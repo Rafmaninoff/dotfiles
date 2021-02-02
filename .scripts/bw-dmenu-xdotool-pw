@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+
+p=$(bitwarden-dmenu --dmenu-pswd-args="-b" --dmenu-args="-b -i -l 10" --stdout | tail -n1)
+xdotool type "$p"
+unset p

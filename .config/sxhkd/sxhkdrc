@@ -1,0 +1,24 @@
+#basic binds
+super + Return
+	$TERMINAL_NOIM
+super + shift + Return
+	$TERMINAL_NOIM -e tmux
+super + control + Return
+	$TERMINAL
+super + space
+	dmenu_run -b -i
+super + control + space
+	i3-dmenu-desktop --dmenu="dmenu -b -i"
+super + r
+	$TERMINAL -e $FILE
+
+#flameshot bind
+super + Print
+	flameshot gui
+
+XF86MonBrightness{Up,Down}
+	light -{A,U} 1 && pkill -SIGRTMIN+12 i3blocks
+
+#display selection
+super + shift + F10
+	dmenumonitor

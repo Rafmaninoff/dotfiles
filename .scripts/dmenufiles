@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+in="$HOME/.bmfiles"
+file="$(sed 's/\s*#.*$//;/^\s*$/d' $in | cut -f1 | dmenu | xargs -I{} grep "{}" | cut -f2)"
+
+echo -n $file

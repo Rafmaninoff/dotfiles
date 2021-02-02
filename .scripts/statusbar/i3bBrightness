@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+
+case "$BLOCK_BUTTON" in
+	4) light -A 1 ;;
+	5) light -U 1 ;;
+esac
+
+printf "☀️%s\n" $(light | cut -d. -f1)
+
+

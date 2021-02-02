@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+e=$(bitwarden-dmenu --dmenu-pswd-args="-b" --dmenu-args="-b -i -l 10" --stdout)
+xdotool type $(head -n1 $e)
+xdotool key Tab
+xdotool type $(tail -n1 $e)
+unset e

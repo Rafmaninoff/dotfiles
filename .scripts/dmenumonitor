@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+
+case $(echo -e 'Two Screens\nExternal Only\nLaptop Only\nAuto\nManual Selection' | dmenu) in
+	"Two Screens")
+	xrandr --output HDMI-0 --off --output DP-0 --primary --mode 1920x1080 --pos 1920x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output eDP-1-1 --mode 1920x1080 --pos 0x0 --rotate normal ;;
+	"External Only")
+	xrandr --output HDMI-0 --off --output DP-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --output DP-1 --off --output DP-2 --off --output DP-3 --off --output eDP-1-1 --off ;;
+	"Laptop Only")
+	xrandr --output HDMI-0 --off --output DP-0 --off --output DP-1 --off --output DP-2 --off --output DP-3 --off --output eDP-1-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal ;;
+	"Auto")
+		xrandr --auto ;;
+	"Manual Selection")
+		arandr & disown ;;
+esac

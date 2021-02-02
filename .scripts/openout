@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+
+basename="$(echo "$1" | sed 's/\.[^\/.]*$//')"
+
+case "$1" in
+	*\.tex|*\.[Rr]md|*\.m[dse]) setsid xdg-open "$basename".pdf >/dev/null 2>&1 & ;;
+esac
+
+

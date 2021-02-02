@@ -1,0 +1,33 @@
+#!/usr/bin/env sh
+
+num="${2:-5}"
+[ -z "$PULSE" ] && command -v pulseaudio >/dev/null 2>&1 && pulseaudio --check && export PULSE="true"
+
+if [ "PULSE" ]; then
+	toggle(){ pulsemixer --toggle-mute ;}
+	mute(){ pulsemixer --mute ;}
+	up(){ pulsemixer --change-volume +"$num" ;}
+    down(){ pulsemixer --change-volume -"$num" ;}
+	control(){ setsid "$TERMINAL" -e pulsemixer; }
+	get(){ pulsemixer --get-volume | cut -d\  -f1;}
+else
+	toggle(){ amixer sset Master toggle ;}
+	mute(){ amixer sset Master mute ;}
+	up(){ amixer sset Master "$num"%+ ;}
+    down(){ amixer sset Master "$num"%+;}
+	control(){ setsid "$TERMINAL" -e amixer; }
+	get(){ amixer sget Master ;}
+fi
+
+case "$1" in
+	toggle) toggle ;;
+	mute) mute ;;
+	up) up ;;
+	down) down ;;
+	control) control ;;
+	get) get ;;
+esac
+
+pkill -RTMIN+10 i3blocks &
+
+

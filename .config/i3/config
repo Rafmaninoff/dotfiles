@@ -1,0 +1,251 @@
+#enable touchpad tapping
+exec ~/.scripts/touchpad.sh
+
+#set terminal
+set $term st
+
+#modifier is super key
+set $mod Mod4
+
+#restart i3 in place
+bindsym $mod+Escape reload
+bindsym $mod+Shift+Escape restart
+
+
+#gaps/borders/whatever settings
+#don't draw borders or have gaps in workspaces with only one container
+smart_borders on
+smart_gaps on
+#keybinds
+bindsym $mod+b gaps inner current plus 1
+bindsym $mod+n gaps inner current minus 1
+bindsym $mod+Shift+b gaps inner current set 8
+bindsym $mod+Shift+n gaps inner current set 0
+
+#set the window edge
+for_window [class="^.*"] border pixel 2
+
+# Font for window titles. Will also be used by the bar unless a different font
+# is used in the bar {} block below.
+font pango:Inconsolata-Bold 11
+
+# Use Mouse+$mod to drag floating windows to their wanted position
+floating_modifier $mod
+
+# kill focused window
+ bindsym $mod+Shift+q kill
+
+#scratchpad windows
+#simple tmux window for running commands
+	for_window [instance="dropdown"] floating enable
+	for_window [instance="dropdown"] resize set 1152 648
+	for_window [instance="dropdown"] move scratchpad
+	for_window [instance="dropdown"] border pixel 5
+	exec --no-startup-id $term -n "dropdown"  -f Monospace-14 -e tmux
+	bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
+#terminal running R for quick maths
+	for_window [instance="maths"] floating enable
+	for_window [instance="maths"] resize set 1152 648
+	for_window [instance="maths"] move scratchpad
+	for_window [instance="maths"] border pixel 5
+	exec --no-startup-id $term -n maths -f mono:pixelsize=20 -e R -q
+	bindsym $mod+a [instance="maths"] scratchpad show; [instance="maths"] move position center
+#terminal with a weather report
+	for_window [instance="weather"] floating enable
+	for_window [instance="weather"] resize set 1152 648
+	for_window [instance="weather"] move scratchpad
+	for_window [instance="weather"] border pixel 5
+	exec --no-startup-id $term -n weather -e ./.scripts/weatherterm.sh
+	bindsym $mod+Shift+w [instance="weather"] scratchpad show; [instance="weather"] move position center
+#pavucontrol
+	for_window [class="pavucontrol-qt"] floating enable
+	for_window [class="pavucontrol-qt"] resize set 1152 648
+	for_window [class="pavucontrol-qt"] move scratchpad
+	for_window [class="pavucontrol-qt"] border pixel 5
+	exec --no-startup-id pavucontrol-qt
+	bindsym $mod+Control+s [class="pavucontrol-qt"] scratchpad show; [class="pavucontrol-qt"] move position center
+#random notes
+	for_window [instance="notes"] floating enable
+	for_window [instance="notes"] resize set 1152 648
+	for_window [instance="notes"] move scratchpad
+	for_window [instance="notes"] border pixel 5
+	exec --no-startup-id st -n notes -e nvim -c "silent AutoSaveToggle" ~/notes.txt
+	bindsym $mod+Control+n [instance="notes"] scratchpad show; [instance="notes"] move position center
+
+
+#assigning windows to workspaces
+assign [ class="Firefox" ] $ws1
+assign [ class="discord" ] $ws2
+assign [ class="TelegramDesktop" ] $ws3
+assign [ class="Slack" ] $ws3
+assign [ class="Steam" ] $ws6
+assign [ class="MultiMC5" ] $ws6
+assign [ class="dagor2" ] $ws7
+assign [ class="Minecraft (\d+(\.\d+){1,2}|\d{1,2}w([0-4]\d|5[0-3])[a-z])" ] $ws7
+
+
+# change focus
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+# move focused window
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+#Move workspace to screen
+bindsym $mod+Control+h move workspace to left
+bindsym $mod+Control+j move workspace to down
+bindsym $mod+Control+k move workspace to up
+bindsym $mod+Control+l move workspace to right
+
+#mod+v for vertical split and mod+g for... горизонтальный сплит xD
+bindsym $mod+v split v
+bindsym $mod+g split h
+
+# enter fullscreen mode for the focused container
+bindsym $mod+f fullscreen toggle
+# change container layout (stacked, tabbed, toggle split)
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# toggle tiling / floating
+bindsym $mod+Shift+space floating toggle
+
+# change focus between tiling / floating windows
+bindsym $mod+d focus mode_toggle
+
+# focus the parent container
+#bindsym $mod+a focus parent
+
+# focus the child container
+#bindsym $mod+d focus child
+
+# Define names for default workspaces
+set $ws1 "1"
+set $ws2 "2"
+set $ws3 "3"
+set $ws4 "4"
+set $ws5 "5"
+set $ws6 "6"
+set $ws7 "7"
+set $ws8 "8"
+set $ws9 "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+
+# switch to workspace
+bindcode $mod+10 workspace $ws1
+bindcode $mod+11 workspace $ws2
+bindcode $mod+12 workspace $ws3
+bindcode $mod+13 workspace $ws4
+bindcode $mod+14 workspace $ws5
+bindcode $mod+15 workspace $ws6
+bindcode $mod+16 workspace $ws7
+bindcode $mod+17 workspace $ws8
+bindcode $mod+18 workspace $ws9
+bindcode $mod+19 workspace $ws10
+bindcode $mod+Control+10 workspace $ws11
+bindcode $mod+Control+11 workspace $ws12
+bindcode $mod+Control+12 workspace $ws13
+bindcode $mod+Control+13 workspace $ws14
+bindcode $mod+Control+14 workspace $ws15
+bindcode $mod+Control+15 workspace $ws16
+bindcode $mod+Control+16 workspace $ws17
+bindcode $mod+Control+17 workspace $ws18
+bindcode $mod+Control+18 workspace $ws19
+bindcode $mod+Control+19 workspace $ws20
+
+# move focused container to workspace
+bindcode $mod+Shift+10 move container to workspace $ws1
+bindcode $mod+Shift+11 move container to workspace $ws2
+bindcode $mod+Shift+12 move container to workspace $ws3
+bindcode $mod+Shift+13 move container to workspace $ws4
+bindcode $mod+Shift+14 move container to workspace $ws5
+bindcode $mod+Shift+15 move container to workspace $ws6
+bindcode $mod+Shift+16 move container to workspace $ws7
+bindcode $mod+Shift+17 move container to workspace $ws8
+bindcode $mod+Shift+18 move container to workspace $ws9
+bindcode $mod+Shift+19 move container to workspace $ws10
+bindcode $mod+Shift+Control+10 move container to workspace $ws11
+bindcode $mod+Shift+Control+11 move container to workspace $ws12
+bindcode $mod+Shift+Control+12 move container to workspace $ws13
+bindcode $mod+Shift+Control+13 move container to workspace $ws14
+bindcode $mod+Shift+Control+14 move container to workspace $ws15
+bindcode $mod+Shift+Control+15 move container to workspace $ws16
+bindcode $mod+Shift+Control+16 move container to workspace $ws17
+bindcode $mod+Shift+Control+17 move container to workspace $ws18
+bindcode $mod+Shift+Control+18 move container to workspace $ws19
+bindcode $mod+Shift+Control+19 move container to workspace $ws20
+
+# exit i3 (logs you out of your X session)
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+
+#Resize windows directly with vimkeys, because ergonomics
+bindsym $mod+Shift+Control+h resize shrink width 10 px or 10 ppt
+bindsym $mod+Shift+Control+j resize grow height 10 px or 10 ppt
+bindsym $mod+Shift+Control+k resize shrink height 10 px or 10 ppt
+bindsym $mod+Shift+Control+l resize grow width 10 px or 10 ppt
+
+# resize window (you can also use the mouse for that)
+#mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+
+        # back to normal: Enter or Escape or $mod+r
+        #bindsym Return mode "default"
+        #bindsym Escape mode "default"
+        #bindsym $mod+r mode "default"
+#}
+
+#bindsym $mod+r mode "resize"
+
+#exec_always --no-startup-id ~/.scripts/polybar_launch.sh
+
+# Start i3bar to display a workspace bar (plus the system information i3status
+# finds out, if available)
+bar {
+	id bar-1
+	position top
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
+}
+
+# bar toggle, hide or show
+bindsym $mod+m bar mode toggle
+
+bindsym $mod+shift+x exec bash /home/raf/.scripts/locki3.sh
+
+
+# Pulse Audio controls
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% #increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% #decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle # mute sound
+
+# Touchpad controls
+bindsym XF86TouchpadToggle exec /some/path/toggletouchpad.sh # toggle touchpad
+
+# Media player controls
+bindsym XF86AudioPlay exec playerctl play
+bindsym XF86AudioPause exec playerctl pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+
+#set the wallpaper on i3 startup
+exec_always wallpaperset $HOME/wallpapers/
