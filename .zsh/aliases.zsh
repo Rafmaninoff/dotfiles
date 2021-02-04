@@ -5,7 +5,7 @@ if [[ -e /usr/bin/pacman ]]; then
 	abbrev-alias -g paci="pikaur -S"
 	abbrev-alias -g pacq="pikaur -Ss"
 	abbrev-alias -g pacr="pacman -Rs"
-	alias update="sudo pacman -Sy && sudo powerpill -Su && pikaur -Syu && zplug update && nvim +PlugUpdate +qall"
+	alias update="sudo pacman -Sy && sudo powerpill -Su && yay -Syua && zplug update && nvim +PlugUpdate +qall"
 fi
 
 #---# Ubuntu/Debian-Specific #---#
