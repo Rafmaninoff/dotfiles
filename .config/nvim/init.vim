@@ -44,8 +44,17 @@ call plug#begin('~/.local/share/nvim/plugged')
 		let g:tex_flavor='latex'
 		let g:vimtex_view_method='zathura'
 		let g:vimtex_quickfix_mode=0
-		set conceallevel=1
+		let g:vimtex_syntax_conceal = {
+			  \ 'accents': 1,
+			  \ 'greek': 1,
+			  \ 'math_bounds': 0,
+			  \ 'math_delimiters': 1,
+			  \ 'math_super_sub': 1,
+			  \ 'math_symbols': 1,
+			  \ 'styles': 1,
+			  \}
 		let g:tex_conceal='abmgs'
+		set conceallevel=1
 	Plug 'xuhdev/vim-latex-live-preview', { 'for': 'tex' }
 		let g:livepreview_previewer = 'zathura'
 	Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(69) } }
