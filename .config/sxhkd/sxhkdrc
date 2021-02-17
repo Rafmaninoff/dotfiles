@@ -1,10 +1,10 @@
 #basic binds
 super + Return
-	$TERMINAL_NOIM
-super + shift + Return
-	$TERMINAL_NOIM -e tmux
-super + control + Return
 	$TERMINAL
+super + shift + Return
+	$TERMINAL -e tmux
+# super + control + Return
+# 	$TERMINAL
 super + space
 	dmenu_run -b -i
 super + control + space

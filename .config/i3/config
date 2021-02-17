@@ -2,7 +2,7 @@
 exec ~/.scripts/touchpad.sh
 
 #set terminal
-set $term st
+set $term alacritty
 
 #modifier is super key
 set $mod Mod4
@@ -41,21 +41,21 @@ floating_modifier $mod
 	for_window [instance="dropdown"] resize set 1152 648
 	for_window [instance="dropdown"] move scratchpad
 	for_window [instance="dropdown"] border pixel 5
-	exec --no-startup-id $term -n "dropdown"  -f Monospace-14 -e tmux
+	exec --no-startup-id $term --class "dropdown" -e tmux
 	bindsym $mod+u [instance="dropdown"] scratchpad show; [instance="dropdown"] move position center
 #terminal running R for quick maths
 	for_window [instance="maths"] floating enable
 	for_window [instance="maths"] resize set 1152 648
 	for_window [instance="maths"] move scratchpad
 	for_window [instance="maths"] border pixel 5
-	exec --no-startup-id $term -n maths -f mono:pixelsize=20 -e R -q
+	exec --no-startup-id $term --class maths -o font.size=20.0 -e R -q
 	bindsym $mod+a [instance="maths"] scratchpad show; [instance="maths"] move position center
 #terminal with a weather report
 	for_window [instance="weather"] floating enable
 	for_window [instance="weather"] resize set 1152 648
 	for_window [instance="weather"] move scratchpad
 	for_window [instance="weather"] border pixel 5
-	exec --no-startup-id $term -n weather -e ./.scripts/weatherterm.sh
+	exec --no-startup-id $term --class weather -e ./.scripts/weatherterm.sh
 	bindsym $mod+Shift+w [instance="weather"] scratchpad show; [instance="weather"] move position center
 #pavucontrol
 	for_window [class="pavucontrol-qt"] floating enable
@@ -69,7 +69,7 @@ floating_modifier $mod
 	for_window [instance="notes"] resize set 1152 648
 	for_window [instance="notes"] move scratchpad
 	for_window [instance="notes"] border pixel 5
-	exec --no-startup-id st -n notes -e nvim -c "silent AutoSaveToggle" ~/notes.txt
+	exec --no-startup-id $term --class notes -e nvim -c "silent AutoSaveToggle" ~/notes.txt
 	bindsym $mod+Control+n [instance="notes"] scratchpad show; [instance="notes"] move position center
 
 
