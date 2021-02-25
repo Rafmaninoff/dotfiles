@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-setxkbmap -layout es -variant rafkbqw -option ctrl:swapcaps -option compose:menu  #keyboard options
+setxkbmap -layout es -variant rafkbqw -option ctrl:swapcaps -option compose:lsgt
 
 #fcitx block
 export GTK_IM_MODULE=fcitx
